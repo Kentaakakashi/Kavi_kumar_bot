@@ -1,1 +1,14 @@
-
+{
+  "name": "kenta-lemon-bot",
+  "version": "1.0.0",
+  "description": "Private relationship bot for Kenta and Lemon",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "deploy": "node src/deploy-commands.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.22.1",
+    "firebase-admin": "^13.5.0"
+  }
+}
