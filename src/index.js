@@ -64,6 +64,26 @@ client.once(Events.ClientReady, async readyClient => {
 });
 
 client.on(Events.InteractionCreate, async interaction => {
+     if (interaction.isModalSubmit()) {
+    if (interaction.customId === "letitout_write") {
+        const message = interaction.fields.getTextInputValue("feeling");
+
+        await db.collection("let_it_out").add({
+            authorId: interaction.user.id,
+            message,
+            createdAt: new Date(),
+            expiresAt: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000)
+        });
+
+        return interaction.reply({
+            content:
+                "💭 Your thoughts have been saved privately. They'll disappear automatically after 14 days.",
+            ephemeral: true
+        });
+    }
+
+    return;
+     }
     if (!interaction.isChatInputCommand()) return;
 
     if (!isAllowed(interaction)) {
